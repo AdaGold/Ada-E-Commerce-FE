@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import CreateUserForm  from '../components/CreateUserForm';
 
 const Login = () => {
     const { login, user } = useAuth();
@@ -11,7 +12,7 @@ const Login = () => {
 
     const handleLogin = () => {
         login(email)
-            .then(() => navigate('/Home'))
+            .then(() => navigate('/home'))
             .catch(() => setError('User not found. Try again!'));
     };
 
@@ -19,7 +20,7 @@ const Login = () => {
         if (user) {
             navigate('/home');
         }
-    }, [user]);
+    }, [navigate, user]);
 
     return (
         <div>
@@ -35,6 +36,7 @@ const Login = () => {
             {error && <p>{error}</p>}
 
             <button onClick={handleLogin}>Login</button>
+            <CreateUserForm />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { AuthContext } from '../Hooks/useAuth.ts';
 
 const userUrl = import.meta.env.VITE_USER_URL;
 
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     email: fetchedUser.email,
                     isAdmin: fetchedUser.is_admin // Map snake_case to camelCase
                 });
-            });
+            })
     };
     
     const logout = () => {

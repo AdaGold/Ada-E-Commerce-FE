@@ -2,8 +2,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Products from './pages/Products';
+// import Products from './pages/Products';
 import Orders from './pages/Orders';
+import Cart from './pages/Cart';
+import Account from './pages/Account';
+
 
 
 const App = () => {
@@ -23,13 +26,23 @@ const App = () => {
           <Orders />
         </ProtectedRoute>
       } />
+      <Route path="/cart" element={
+        <ProtectedRoute>
+          <Cart />
+        </ProtectedRoute>
+      } />
+      <Route path="/account" element={
+        <ProtectedRoute>
+          <Account />
+        </ProtectedRoute>
+      } />
 
-      {/* Admin only */}
+      {/* Admin only
       <Route path="/products" element={
         <ProtectedRoute>
           <Products />
         </ProtectedRoute>
-      } />
+      } /> */}
 
       {/* Catch all - redirect to login */}
       <Route path="*" element={<Navigate to="/login" />} />

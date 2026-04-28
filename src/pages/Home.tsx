@@ -1,7 +1,6 @@
 import '../css/Home.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
 import type { Product, APIProduct } from '../types';
 import ProductList from '../components/ProductList';
 import ProductForm from '../components/ProductForm';
@@ -78,7 +77,6 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar />
             <h1 className="product-list__title">Products</h1>
             {error && <p>{error}</p>}
             {products.length === 0

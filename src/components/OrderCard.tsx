@@ -6,14 +6,13 @@ const OrderCard = ({
     products
 }: Order ) => {
 
-    const productsList = products.map((product: CartItem) => {
+    const orderItemList = products.map((product: CartItem) => {
         return (
-            <li key={product.productId}>
+            <>
                 <h3>{product.name}</h3>
                 <h3>{product.price}</h3>
                 <h3>{product.quantity}</h3>
-
-            </li>
+            </>
         )
 
     });
@@ -22,7 +21,7 @@ const OrderCard = ({
         <li className="order">
             <h2>{id}</h2>
             <h3>User: {userId}</h3>
-            <ul>{productsList}</ul>
+            <ul>{orderItemList}</ul>
 
         </li>
         );

@@ -1,7 +1,8 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
+import Navbar from "./Navbar";
 
-const ProtectedRoute = ({ children, requireAdmin = false }: { children: React.ReactNode, requireAdmin?: boolean}) => {
+const ProtectedRoute = ({ requireAdmin = false }: { requireAdmin?: boolean}) => {
     const { user } = useAuth();
 
     if (!user) {
@@ -10,7 +11,12 @@ const ProtectedRoute = ({ children, requireAdmin = false }: { children: React.Re
     if (requireAdmin && !user.isAdmin) {
         return <Navigate to="/home" />;
     }
-    return children;
+    return (
+        <>
+            <Navbar />
+            <Outlet />
+        </>
+    )
 };
 
 export default ProtectedRoute;

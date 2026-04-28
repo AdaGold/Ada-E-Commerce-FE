@@ -22,10 +22,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         setItems(prev => {
             const existing = prev.find(i => i.name === item.name);
             if (existing) {
-                return prev.map(i =>
-                    i.name === item.name
-                        ? { ...i, quantity: i.quantity + item.quantity }
-                        : i
+                return prev.map(cartItem =>
+                    cartItem.name === item.name
+                        ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+                        : cartItem
                 );
             }
             return [...prev, item];
@@ -34,8 +34,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const updateQuantity = (name: string, delta: number) => {
         setItems(prev => prev
-            .map(i => i.name === name ? { ...i, quantity: i.quantity + delta } : i)
-            .filter(i => i.quantity > 0)
+            .map(item => item.name === name ? { ...item, quantity: item.quantity + delta } : item)
+            .filter(item => item.quantity > 0)
         );
     };
 
@@ -55,11 +55,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         })
         .then(() => setItems([]))        
     };
+    
+    const clearCart = () => setItems([]);
 
     return (
         <CartContext.Provider value={{
-            userId: user?.id ?? '',
-            userEmail: user?.email ?? '',
             items,
             subtotal,
             total,
@@ -67,6 +67,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             updateQuantity,
             removeItem,
             submitOrder,
+            clearCart
         }}>
             {children}
         </CartContext.Provider>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 import { useCart } from '../Hooks/useCart';
 
 const Cart = () => {
@@ -15,7 +14,6 @@ const Cart = () => {
 
     return (
         <div>
-            <Navbar />
             <h1>Cart</h1>
             <p>User ID: {userId}</p>
             <p>Email: {userEmail}</p>

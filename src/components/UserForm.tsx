@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import axios from 'axios';
 import { useAuth } from '../Hooks/useAuth';
 
@@ -17,7 +17,7 @@ const UserForm = () => {
 
     const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -25,7 +25,7 @@ const UserForm = () => {
         }));
     };
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault();
         setStatus('saving');
 

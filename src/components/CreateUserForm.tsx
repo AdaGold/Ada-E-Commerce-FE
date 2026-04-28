@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import axios from 'axios';
 
 const userUrl = import.meta.env.VITE_USER_URL;
@@ -14,7 +15,7 @@ const CreateUserForm = () => {
 
     const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -22,7 +23,7 @@ const CreateUserForm = () => {
         }));
     };
 
-    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault();
         setStatus('saving');
 

@@ -1,5 +1,5 @@
 import '../css/ProductCard.css'
-import type { ProductCardProps } from '../types'
+import type { Product } from '../types'
 import { useAuth } from '../Hooks/useAuth'
 import { useCart } from '../Hooks/useCart'
 import { useState } from 'react'
@@ -9,6 +9,10 @@ const formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 2,
 });
 
+export type ProductCardProps = Product & {
+    deleteProduct: (id: string) => Promise<void>;
+    updateProduct: (id: string, data: Partial<Product>) => Promise<void>;
+}
 
 
 const ProductCard = ({
@@ -22,10 +26,29 @@ const ProductCard = ({
     const { user } = useAuth();
     const { addItem } = useCart();
     const [numItem, setNumItem] = useState(user?.isAdmin? stock: 0);
+    const [success, setSuccess] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNumItem(Number(event.target.value));
     };
+
+    const handleUpdateItem = () => {
+        updateProduct(id, {"stock":numItem})
+        .then(() => setSuccess('Item Updated'))
+        .catch(() => setSuccess('Item not updated'))
+
+    }
+
+    const handleDeleteItem = () => {
+        deleteProduct(id)
+        .then(() => setSuccess('Item Deleted'))
+        .catch(() => setSuccess('Item not deleted'))
+    }
+
+    const handleAddItem = () => {
+        addItem({ productId: id, name, price, quantity: numItem })
+        setSuccess('Item added to cart')
+    }
 
     return (
         <div className="product-card">
@@ -47,13 +70,14 @@ const ProductCard = ({
             <ul className="product-card__actions">
                 {user?.isAdmin ? (
                     <>
-                        <li><button onClick={()=>updateProduct(id, {"stock":numItem})}>Update Stock</button></li>
-                        <li><button onClick={()=>deleteProduct(id)}>Delete Item</button></li>
+                        <li><button onClick={handleUpdateItem}>Update Stock</button></li>
+                        <li><button onClick={handleDeleteItem}>Delete Item</button></li>
                     </>
                 ) : (
-                    <li><button onClick={() => addItem({ productId: id, name, price, quantity: numItem })}>Add to Cart</button></li>
+                    <li><button onClick={handleAddItem}>Add to Cart</button></li>
                 )}
             </ul>
+            {success}
         </div>
     )
 }

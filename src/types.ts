@@ -11,11 +11,7 @@ export type Product = {
     name: string;
     price: number;
     stock: number;
-}
-
-export type ProductCardProps = Product & {
-    deleteProduct: (id: string) => Promise<void>;
-    updateProduct: (id: string, data: Partial<Product>) => Promise<void>;
+    imageURL: string;
 }
 
 export type Order = {
@@ -32,8 +28,6 @@ export type CartItem = {
 }
 
 export type CartContextType = {
-    userId: string;
-    userEmail: string;
     items: CartItem[];
     subtotal: number;
     total: number;
@@ -41,6 +35,7 @@ export type CartContextType = {
     updateQuantity: (name: string, delta: number) => void;
     removeItem: (name: string) => void;
     submitOrder: () => Promise<void>;
+    clearCart: () => void;
 }
 
 export type AuthContextType = {

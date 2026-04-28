@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
 import type{ Order, APIOrder, CartItem } from '../types';
 import { useAuth } from '../Hooks/useAuth';
 import OrderList from '../components/OrderList'
@@ -44,7 +43,6 @@ const Orders = () => {
 
     return (
         <div>
-            <Navbar />
             <h1>{user?.isAdmin ? 'All Orders' : 'My Orders'}</h1>
             {error && <p>{error}</p>}
             <OrderList orders={orders} />

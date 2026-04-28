@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import CreateUserForm  from '../components/CreateUserForm';
+import CreateUserForm from '../components/CreateUserForm';
+import '../css/Login.css';
 
 const Login = () => {
     const { login, user } = useAuth();
@@ -20,23 +21,23 @@ const Login = () => {
         if (user) {
             navigate('/home');
         }
-    }, [navigate, user]);
+    // eslint-disable-next-line
+    }, [user]);
 
     return (
-        <div>
-            <h1>Login</h1>
-
-            <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-
-            {error && <p>{error}</p>}
-
-            <button onClick={handleLogin}>Login</button>
-            <CreateUserForm />
+        <div className="login-page">
+            <div className="login-card">
+                <h1>Login</h1>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                {error && <p className="error">{error}</p>}
+                <button onClick={handleLogin}>Login</button>
+                <CreateUserForm />
+            </div>
         </div>
     );
 };

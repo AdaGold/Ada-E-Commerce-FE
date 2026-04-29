@@ -77,11 +77,11 @@ return (
             <h1 className="products__title">Add Product</h1>
             <form onSubmit={handleSubmit} className="products__form">
                 <label htmlFor="name">Product Name</label>
-                { makeControlledInput('name', "text") }
+                { makeControlledInput('name', 'text') }
                 <label htmlFor="price">Price</label>
-                { makeControlledInput('price', "number") }
+                { makeControlledInput('price', 'number') }
                 <label htmlFor="stock">Stock</label>
-                { makeControlledInput('stock', "number") }
+                { makeControlledInput('stock', 'number') }
                 <label htmlFor="image">Image</label>
                 <input type="file" name="file" accept="image/*" onChange={handleFileChange} />
                 <input type="submit" value="Add Product" />

@@ -1,10 +1,10 @@
-import UserForm  from '../components/UserForm'
+import CreateUserForm  from '../components/CreateUserForm'
 
 const Account = () => {
 
     return (
         <div>
-            <UserForm />
+            <CreateUserForm />
         </div>
     );
 };

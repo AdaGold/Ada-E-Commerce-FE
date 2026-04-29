@@ -1,16 +1,19 @@
 import { useState } from 'react';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, SubmitEvent } from 'react';
 import axios from 'axios';
+import { useAuth } from '../Hooks/useAuth';
 
 const userUrl = import.meta.env.VITE_USER_URL;
 
 const CreateUserForm = () => {
 
+    const { user } = useAuth();
+
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        isAdmin: false,
+        firstName: user?.firstName ?? '',
+        lastName: user?.lastName ?? '',
+        email: user?.email ?? '',
+        isAdmin: user?.isAdmin ?? false,
     });
 
     const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
@@ -27,14 +30,39 @@ const CreateUserForm = () => {
         e.preventDefault();
         setStatus('saving');
 
-        axios.post(`${userUrl}/users/`, {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            is_admin: formData.isAdmin,
-        })
+
+        if(user === null){
+            axios.post(`${userUrl}/users/`, {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.email,
+                is_admin: formData.isAdmin,
+            })
+                .then(() => setStatus('saved'))
+                .catch(() => setStatus('error'));
+        }
+        else {
+            axios.put(`${userUrl}/users/${user?.id}`, {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.email,
+                is_admin: formData.isAdmin,
+            })
             .then(() => setStatus('saved'))
             .catch(() => setStatus('error'));
+        }
+    };
+
+    const makeControlledInput = (inputName: string) => {
+        return (
+            <input
+            type={'text'}
+            name={inputName}
+            id={`input-${inputName}`}
+            value={formData[inputName]}
+            onChange={handleChange}
+            />
+        );
     };
 
     return (
@@ -42,33 +70,13 @@ const CreateUserForm = () => {
             <h1> Add User </h1>
         
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>First Name</label>
-                    <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                </div>
+                <label htmlFor="firstName">First Name</label>
+                { makeControlledInput('firstName') }
+                <label htmlFor="lastName">Last Name</label>
+                { makeControlledInput('lastName') }
+                <label htmlFor="email">Last Name</label>
+                { makeControlledInput('email') }
+
                 <div>
                     <label>
                         <input
@@ -80,9 +88,17 @@ const CreateUserForm = () => {
                         Admin
                     </label>
                 </div>
-                <button type="submit" disabled={status === 'saving'}>
-                    Add User
-                </button>
+                {
+                    user? 
+                    <button type="submit">
+                        Update User
+                    </button>
+                    :
+                    <button type="submit">
+                        Add User
+                    </button>
+                }
+
                 {status === 'saved' && <p>Changes saved.</p>}
                 {status === 'error' && <p>Failed to save changes.</p>}
             </form>

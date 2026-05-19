@@ -60,7 +60,7 @@ const ProductForm = ({addProduct}: ProductFormProps) => {
         setFormState(formDefault);
     };
 
-    const makeControlledInput = (inputName, type) => {
+    const makeControlledInput = (inputName: string, type: string) => {
         return (
             <input
             type={type}

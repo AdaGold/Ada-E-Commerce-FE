@@ -30,7 +30,7 @@ const CreateUserForm = () => {
         e.preventDefault();
         setStatus('saving');
 
-        if(user === null){
+        if (user === null){
             axios.post(`${userUrl}/users/`, {
                 first_name: formData.firstName,
                 last_name: formData.lastName,

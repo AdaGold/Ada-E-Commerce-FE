@@ -26,7 +26,7 @@ const ProductForm = ({addProduct}: ProductFormProps) => {
         const inputName = event.target.name;
 
         setFormState(prev => ({...prev, 
-            [inputName]: inputName ==='price'|| inputName === 'stock'? Number(inputValue) : inputValue}));
+            [inputName]: inputName ==='price'|| inputName === 'stock' ? Number(inputValue) : inputValue}));
         
     };
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {

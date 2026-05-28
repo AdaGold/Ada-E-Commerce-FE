@@ -5,7 +5,7 @@ This is a basic frontend E-Commerce Frontend for Ada Developers Academy's AWS cu
 ## Pre-Setup
 The following three microservices repos will be necessary for it to run effectively:
 
-1. Products Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-Orders-Service)
+1. Products Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-Product-Service)
 2. Users Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-User-Service)
 3. Orders Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-Orders-Service)
 

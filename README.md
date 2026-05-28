@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Ada E-Commerce Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a basic frontend E-Commerce Frontend for Ada Developers Academy's AWS curriculum.
 
-Currently, two official plugins are available:
+## Pre-Setup
+The following three microservices repos will be necessary for it to run effectively:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Products Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-Orders-Service)
+2. Users Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-User-Service)
+3. Orders Microservice (https://github.com/Ada-Activities/Ada-E-Commerce-Orders-Service)
 
-## React Compiler
+You will also need a pre-signed url lambda function running in AWS. This solution currently works with the pre-signed url solution from the Storage lab. If your lambda has different response bodies or query parameters, you may need to tweak the lambda request in `ProductForm.tsx`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+For local testing, the microservices were run on the following ports:
 
-## Expanding the ESLint configuration
+- Users Microservice - `localhost:5000` (VITE_USER_URL)  
+- Orders Microservice - `localhost:8000` (VITE_ORDER_URL)
+- Products Microservice - `localhost:8080` (VITE_PRODUCT_URL) 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Setup
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Fork and Clone this repository.
+2. Run the command `npm install` to install the necessary dependencies.
+3. Create a `.env` file with the following variables:
+   1. VITE_USER_URL (Users Microservice Endpoint)
+   2. VITE_ORDER_URL (Orders Microservice Endpoint)
+   3. VITE_PRODUCT_URL (Products Microservice Endpoint)
+   4. VITE_LAMBDA_URL (Pre-signed URL Lambda Endpoint)
+4. Run the command `npm run dev` to test that the application is working.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Current Functionality
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The following functionality should be currently available:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Login Page
+   1. You will be able to create a new user with a first name, last name, email and the ability to select whether or not the user is an admin.
+   2. Once a User has been created, their email can be used to login.
+2. Home Page
+   1. Admin Users
+      1. Admin users will be able to see a list of every product. 
+      2. Admin users will be able to update the stock of each product.
+      3. Admin users will be able to delete any product.
+      4. Admin users will have a form at the bottom where they will be able to add a product.
+   2. Non-admin Users
+      1. Non-admin users will be able to see a list of every produc.
+      2. Non-admin users will be able to change the quantity they would like and add that item to their cart.
+3. Orders Page
+   1. Admin users will be able to see all orders from all users.
+   2. Non-admin users will be able to see only their past orders.
+4. Cart Page
+   1. Admin users will see an empty cart as they currently do not have cart functionality.
+   2. Non-Admin users will see a list of items they currently have in their cart. They will be able to update quantities directly from the cart.
+5. Account Page 
+   1. All Users will be able to see and update their account information.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Current Known Issues
+1. Users can more pieces of a product than are available.
+2. Admin users can see a cart page but have no cart functionality
+3. Login is based off email only
+4. EDA is not currently implemented when a cart is submitted
+5. Styling and testing are limited.
+
+
+Note: Some elements (including the styling) of this repository were generated using AI. 

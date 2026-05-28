@@ -1,0 +1,53 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+}
+
+.navbar__brand {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.navbar__welcome {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar__links a {
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+
+.navbar__links a:hover {
+    opacity: 1;
+}
+
+.navbar__links button {
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background: transparent;
+    color: black;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.navbar__links button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

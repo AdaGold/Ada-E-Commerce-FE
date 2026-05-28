@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+}
+.add-item {
+    text-align: center;
+}
+.add-item button {
+    padding: 8px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background: transparent;
+    color: blue;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+}

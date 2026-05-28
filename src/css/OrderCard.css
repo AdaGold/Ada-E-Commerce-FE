@@ -1,0 +1,52 @@
+.order {
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #fafafa;
+}
+
+.order__id {
+    font-size: 14px;
+    color: #888;
+    margin: 0 0 0.25rem;
+    font-weight: 400;
+}
+
+.order__user {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 1rem;
+}
+
+.order__items {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.order__items thead th {
+    text-align: left;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 2px solid #d0d0d0;
+    color: #555;
+    font-weight: 600;
+}
+
+.order__items tbody td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.order__items tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.order__items .order__item-price {
+    text-align: right;
+}
+
+.order__items .order__item-quantity {
+    text-align: right;
+}
